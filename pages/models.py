@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 
 class Train(models.Model):
     name = models.CharField(max_length=100)
-    train_no = models.IntegerField(default=0)
+    train_no = models.IntegerField(default=0, unique=True)
     source = models.CharField(max_length=100)
     destination = models.CharField(max_length=100)
     distance = models.IntegerField(default=0)
@@ -15,7 +15,8 @@ class Train(models.Model):
     
      
 class Ticket(models.Model):
-    train_no = models.IntegerField(default=0)
+    # train_no = models.IntegerField(default=0)
+    #train = models.ForeignKey(to=Train)
     PNR = models.IntegerField(default=0)
     source = models.CharField(max_length=100)
     destination = models.CharField(max_length=100)

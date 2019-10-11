@@ -17,7 +17,13 @@
 		<ul>
 			<li class="active"><a href='#'>Home</a></li>
 			<li><a href='#'>PNR status</a></li>
+			{% if user.is_authenticated %}
+			<li>Hello, {{user.first_name}}</li>
+			<li><a href='account/logout'>Logout</a></li>
+			{% else %}
 			<li><a href='account/register'>Register</a></li>
+			<li><a href='account/login'>Login</a></li>
+			{% endif %}
 			<li><a href='#'>About</a></li>
 			<li><a href='#'>Contact</a></li>
 		</ul>
