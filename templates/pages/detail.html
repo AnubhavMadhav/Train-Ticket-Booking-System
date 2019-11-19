@@ -1,0 +1,82 @@
+{% extends 'booking/base.html' %}
+{% block title %}Details{% endblock %}
+
+{% block body %}
+{% load staticfiles %}
+
+<!--suppress ALL -->
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <ul class="list-group">
+                <form method="get">
+                    <li class="list-group-item">
+                        <h2><strong>Trains</strong></h2>
+                        <h4><span>Signed In as {{ user.username }}, </span><a href="{% url 'booking:logout_user' %}">Logout</a></h4>
+                    </li>
+                    <li class="list-group-item">
+                        <table class="table">
+                            <thead>
+                            <tr style="background-color:black;color:white;">
+                                <th>Source</th>
+                                <th>Destination</th>
+                                <th>Train Name</th>
+                                <th>Date</th>
+                                <th>Departure Time</th>
+                                <th>Arrival Time</th>
+                                <th>CC</th>
+                                <th>AC 3</th>
+                                <th>AC 2</th>
+                                <th>AC 1</th>
+                            </tr>
+                            </thead>
+                            {% for train in trains %}
+                            <tr>
+                                <td>{{ train.Source }}</td>
+                                <td>{{ train.Destination }}</td>
+                                <td>{{ train.Train_Name }}</td>
+                                <td>{{ train.Date }}</td>
+                                <td>{{ train.Departure_time }}</td>
+                                <td>{{ train.Arrival_time }}</td>
+
+                                {% ifequal is_return "No" %}
+                                <td><span>{{ passengers }}x{{ train.CC_fare }} = </span><a
+                                        href="book/{{ train.CC_fare }}/{{ passengers }}/{{ is_return }}" type="submit"><span>&#x20b9;{% widthratio train.CC_fare 1 passengers %}</span></a>
+                                </td>
+                                <td><span>{{ passengers }}x{{ train.Ac3_fare }} = </span><a
+                                        href="book/{{ train.Ac3_fare }}/{{ passengers }}/{{ is_return }}" type="submit"><span>&#x20b9;{% widthratio train.Ac3_fare 1 passengers %}</span></a>
+                                </td>
+                                <td><span>{{ passengers }}x{{ train.Ac2_fare }} = </span><a
+                                        href="book/{{ train.Ac2_fare }}/{{ passengers }}/{{ is_return }}" type="submit"><span>&#x20b9;{% widthratio train.Ac2_fare 1 passengers %}</span></a>
+                                </td>
+                                <td><span>{{ passengers }}x{{ train.Ac1_fare }} = </span><a
+                                        href="book/{{ train.Ac1_fare }}/{{ passengers }}/{{ is_return }}" type="submit"><span>&#x20b9;{% widthratio train.Ac1_fare 1 passengers %}</span></a>
+                                </td>
+                                {% else %}
+                                <td><span>2x{{ passengers }}x{{ train.CC_fare }} = </span><a
+                                        href="book/{{ train.CC_fare }}/{{ passengers }}/{{ is_return }}" type="submit"><span>&#x20b9;{% widthratio train.CC_fare 0.5 passengers %}</span></a>
+                                </td>
+                                <td><span>2x{{ passengers }}x{{ train.Ac3_fare }} = </span><a
+                                        href="book/{{ train.Ac3_fare }}/{{ passengers }}/{{ is_return }}" type="submit"><span>&#x20b9;{% widthratio train.Ac3_fare 0.5 passengers %}</span></a>
+                                </td>
+                                <td><span>2x{{ passengers }}x{{ train.Ac2_fare }} = </span><a
+                                        href="book/{{ train.Ac2_fare }}/{{ passengers }}/{{ is_return }}" type="submit"><span>&#x20b9;{% widthratio train.Ac2_fare 0.5 passengers %}</span></a>
+                                </td>
+                                <td><span>2x{{ passengers }}x{{ train.Ac1_fare }} = </span><a
+                                        href="book/{{ train.Ac1_fare }}/{{ passengers }}/{{ is_return }}" type="submit"><span>&#x20b9;{% widthratio train.Ac1_fare 0.5 passengers %}</span></a>
+                                </td>
+                                {% endifequal %}
+                            </tr>
+                            {% endfor %}
+
+                        </table>
+                    </li>
+                </form>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Train</title>
+    {% load staticfiles %}
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{% static 'booking/styles.css' %}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+<body background="{% static 'booking/image/bg.png' %}">
+<div class="container-fluid vertical-align">
+
+    <!--<div class="row">-->
+    <div class="col-sm-6 col-sm-offset-3 col-md-6 make-transparent">
+        <div class="panel-body" style="color:white;">
+            <h3>Train Booking</h3>
+            <h4><span>Signed In as {{ user.username }}, </span><a href="{% url 'booking:logout_user' %}">Logout</a></h4>
+            <form class="form-horizontal" role="form" action="{% url 'booking:detail' %}" method="get"
+                  enctype="multipart/form-data">
+                {% csrf_token %}
+                <br>
+
+                <label for="p">Source</label>
+                <input type="text" class="form-control form-control-lg" name="p"
+                       placeholder="Source" required>
+                <br>
+                <label for="q">Destination</label>
+                <input type="text" class="form-control form-control-lg" name="q"
+                       placeholder="Destination" required>
+                <br>
+                <label for="r">Date</label>
+                <input type="text" class="form-control form-control-lg" name="r"
+                       placeholder="Date" required>
+                <br>
+                <label for="s">Passengers</label>
+                <input type="number" min="1" class="form-control form-control-sm" name="s" maxlength="3" value="1"
+                       placeholder="Number of passengers" required>
+                <br>
+                <label for="i">Return Journey</label>
+                <input type="checkbox" value="return" id="is_return" name="i">
+                <br>
+                <div class="form-row">
+                    <center>
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10">
+                                <br>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </center>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- </div>-->
+</div>
+</body>
+</html>
